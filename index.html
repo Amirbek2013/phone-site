@@ -31,7 +31,7 @@
                   <h4 class="item-title fs-6">Apple iPhone 13 Pro Max</h4>
                   <img src="./img/iphone.png" class="img-fluid py-2" alt="">
                   <p class="price">Цена 80 000р.</p>
-                  <button class="btn btn-primary">Купить</button>
+                  <button class="btn btn-primary buy-button">Купить</button>
                 </div>
                 <!-- // Описание карточки -->
               </div>
@@ -70,7 +70,7 @@
                   <h4 class="item-title fs-6">Samsung Galaxy S24 Ultra</h4>
                   <img src="./img/samsung-phone.png" class="img-fluid py-2" alt="">
                   <p class="price">Цена 40 000р.</p>
-                  <button class="btn btn-primary">Купить</button>
+                  <button class="btn btn-primary buy-button">Купить</button>
                 </div>
                 <!-- // Описание карточки -->
               </div>
@@ -104,6 +104,24 @@
     
 
   </div> <!-- // Контейнер -->
+
+  <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="buyModalLabel">Оформление покупки</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body" id="buyModalBody">
+          Вы выбрали товар.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Продолжить</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"

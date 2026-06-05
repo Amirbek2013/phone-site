@@ -1,57 +1,49 @@
-const iphone = document.querySelector('.iphone');
-const samsung = document.querySelector('.samsung');
+const buyModal = new bootstrap.Modal(document.getElementById('buyModal'))
+const buyModalBody = document.getElementById('buyModalBody')
 
-iphone.addEventListener('click', function(event) {
-    let clickTarget = event.target
-    let activeButton = iphone.querySelector('.active')
-    let priceItem = iphone.querySelector('.price')
-    let currentPrice
-    let activeButtonColor = iphone.querySelector('.active-border')
+function setupCard(cardElement, prices) {
+    cardElement.addEventListener('click', function(event) {
+        const clickTarget = event.target
+        const priceItem = cardElement.querySelector('.price')
+        const activeColor = cardElement.querySelector('.active-border')
+        const activeSize = cardElement.querySelector('.size-container .active')
 
-    if (clickTarget.classList.contains('color-btn')&& !clickTarget.classList.contains('active-border')) {
-        clickTarget.classList.add('active-border')
-        activeButtonColor.classList.remove('active-border')
-    }
+        if (clickTarget.matches('.color-btn') && !clickTarget.classList.contains('active-border')) {
+            clickTarget.classList.add('active-border')
+            if (activeColor) activeColor.classList.remove('active-border')
+            return
+        }
 
-    if (clickTarget.classList.contains('btn') && !clickTarget.classList.contains('active')) {
-        clickTarget.classList.add('active')
-        activeButton.classList.remove('active')
-    }
+        if (clickTarget.matches('.size-container button') && !clickTarget.classList.contains('active')) {
+            clickTarget.classList.add('active')
+            if (activeSize) activeSize.classList.remove('active')
+            const selectedSize = clickTarget.dataset.size
+            if (selectedSize && prices[selectedSize]) {
+                priceItem.textContent = `Цена: ${prices[selectedSize]}`
+            }
+            return
+        }
 
-    currentPrice = clickTarget.getAttribute('data-size')
-    if (currentPrice === 'medium') {
-        priceItem.textContent = 'Цена: 80.000 руб.'
-    }
+        if (clickTarget.matches('.buy-button')) {
+            const productName = cardElement.querySelector('.item-title').textContent.trim()
+            const currentPrice = priceItem.textContent.trim()
+            const selectedSizeText = cardElement.querySelector('.size-container .active')?.textContent.trim() || ''
+            const selectedColor = cardElement.querySelector('.colors-container .active-border')?.classList.contains('blue') ? 'Синий' :
+                cardElement.querySelector('.colors-container .active-border')?.classList.contains('green') ? 'Зелёный' :
+                cardElement.querySelector('.colors-container .active-border')?.classList.contains('black') ? 'Чёрный' : ''
 
-    if (currentPrice === 'large') {
-        priceItem.textContent = 'Цена: 100.000 руб.'
-    }
+            buyModalBody.textContent = `Вы выбрали ${productName} ${selectedSizeText ? `(${selectedSizeText})` : ''}${selectedColor ? `, цвет: ${selectedColor}` : ''}. ${currentPrice}`
+            buyModal.show()
+        }
+    })
+}
+
+setupCard(document.querySelector('.iphone'), {
+    medium: '80.000 руб.',
+    large: '100.000 руб.'
 })
 
-
-samsung.addEventListener('click', function(event) { 
-    let clickTarget = event.target
-    let activeButton = samsung.querySelector('.active')
-    let priceItem = samsung.querySelector('.price')
-    let currentPrice
-    let activeButtonColor = samsung.querySelector('.active-border')
-
-    if (clickTarget.classList.contains('color-btn')&& !clickTarget.classList.contains('active-border')) {
-        clickTarget.classList.add('active-border')
-        activeButtonColor.classList.remove('active-border')
-    }
-
-    if (clickTarget.classList.contains('btn') && !clickTarget.classList.contains('active')) {
-        clickTarget.classList.add('active')
-        activeButton.classList.remove('active')
-    }
-
-    currentPrice = clickTarget.getAttribute('data-size')
-    if (currentPrice === 'medium') {
-        priceItem.textContent = 'Цена: 40.000 руб.'
-    }
-
-    if (currentPrice === 'large') {
-        priceItem.textContent = 'Цена: 60.000 руб.'
-    }
+setupCard(document.querySelector('.samsung'), {
+    medium: '40.000 руб.',
+    large: '60.000 руб.'
 })
