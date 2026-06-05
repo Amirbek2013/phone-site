@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+/* Стили для кнопки выбора цвета */
+.color-btn {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.black {
+  background-color: black;
+}
+
+/* Активный класс для кнопки выбора цвета */
+.active-border {
+  box-shadow: 0px 0px 0px 3px #fe9b07;
+  /* border: 5px solid #fe9b07; */
+}
